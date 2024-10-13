@@ -1,8 +1,28 @@
 from pydub.generators import Sine
 from pydub.playback import play
+from pydub import AudioSegment
+
+# Define the duration for each note (in milliseconds)
+duration = 500  # ms for each note
+
+def staccato(note, ratio=0.5):
+    note_duration = len(note)
+    staccato_ratio = 0.5  # This will reduce the note length to 50%
+    staccato_note = note[:int(note_duration * staccato_ratio)]
+    silence_duration = int(note_duration * (1 - staccato_ratio))  # Silence to mimic staccato rest
+    silence = AudioSegment.silent(duration=silence_duration)
+    return staccato_note + silence
+AudioSegment.__xor__ = staccato
+
+def shorten(note, ratio=2):
+    note_duration = len(note)
+    shorten_note =  note[:int(note_duration / ratio)]
+    return shorten_note
+AudioSegment.__truediv__ = shorten
 
 # Define the frequencies for each note in Hz
 f_Z = 0
+
 f_C4 = 261.63  # Middle C
 f_D4 = 293.66
 f_E4 = 329.63
@@ -11,8 +31,10 @@ f_G4 = 392.00
 f_A4 = 440.00
 f_B4 = 493.88
 
-# Define the duration for each note (in milliseconds)
-duration = 500 # ms for each note
+f_A5 = f_A4 * 2
+f_B5 = f_B4 * 2
+
+f_C5 = f_C4 * 2
 
 # Generate the notes as sine waves
 note_C = Sine(f_G4).to_audio_segment(duration=duration)
@@ -21,16 +43,42 @@ note_D = Sine(f_G4).to_audio_segment(duration=duration)
 note_E = Sine(f_G4).to_audio_segment(duration=duration)
 note_F = Sine(f_F4).to_audio_segment(duration=duration)
 
+C2 = Sine(f_C4 / 4).to_audio_segment(duration=duration)
+D2 = Sine(f_D4 / 4).to_audio_segment(duration=duration)
+E2 = Sine(f_E4 / 4).to_audio_segment(duration=duration)
+F2 = Sine(f_F4 / 4).to_audio_segment(duration=duration)
+G2 = Sine(f_G4 / 4).to_audio_segment(duration=duration)
+A2 = Sine(f_A4 / 4).to_audio_segment(duration=duration)
+B2 = Sine(f_B4 / 4).to_audio_segment(duration=duration)
+C3 = Sine(f_C4 / 2).to_audio_segment(duration=duration)
+D3 = Sine(f_D4 / 2).to_audio_segment(duration=duration)
+E3 = Sine(f_E4 / 2).to_audio_segment(duration=duration)
+F3 = Sine(f_F4 / 2).to_audio_segment(duration=duration)
+G3 = Sine(f_G4 / 2).to_audio_segment(duration=duration)
+A3 = Sine(f_A4 / 2).to_audio_segment(duration=duration)
+B3 = Sine(f_B4 / 2).to_audio_segment(duration=duration)
+C4 = Sine(f_C4).to_audio_segment(duration=duration) # middle C
 D4 = Sine(f_D4).to_audio_segment(duration=duration)
 E4 = Sine(f_E4).to_audio_segment(duration=duration)
 F4 = Sine(f_F4).to_audio_segment(duration=duration)
 G4 = Sine(f_G4).to_audio_segment(duration=duration)
 A4 = Sine(f_A4).to_audio_segment(duration=duration)
 B4 = Sine(f_B4).to_audio_segment(duration=duration)
+A5 = Sine(f_A5).to_audio_segment(duration=duration)
+B5 = Sine(f_B5).to_audio_segment(duration=duration)
+C5 = Sine(f_C5).to_audio_segment(duration=duration)
+D5 = Sine(f_D4 * 2).to_audio_segment(duration=duration)
+E5 = Sine(f_E4 * 2).to_audio_segment(duration=duration)
+F5 = Sine(f_F4 * 2).to_audio_segment(duration=duration)
+G5 = Sine(f_G4 * 2).to_audio_segment(duration=duration)
 
-# nice part starts on page 4 at "D"
-melody = B4 + Z + B4 + Z + B4 + Z + A4 + Z + G4 + Z + E4 + Z + D4
+A5 = Sine(f_A5).to_audio_segment(duration=duration)
+B5 = Sine(f_B5).to_audio_segment(duration=duration)
+C6 = Sine(f_C5 * 2).to_audio_segment(duration=duration)
 
-# Play the melody
+# nice part starts on page 2 at "D"
+# melody = B5 + Z + A5 + Z + G4 + Z + F4 + Z + E4 + Z + D4 + Z + C4 + Z + B4 + Z + D4
+# melody = C2 + D2 + E2 + F2 + G2 + A2 + B2 + C3 + D3 + E3 + F3 + G3 + A3 + B3 + C4 + D4 + E4 + F4 + G4 + A4 + B4 + C5 + D5 + E5 + F5 + G5 + A5 + B5 + C6 # + D6 + E6 + F6 + G6 + A6 + B6 + C7 + D7 + E7 + F7 + G7 + A7 + B7 + C8
+melody = (A5/4^1) + (A5/4^1) + (A5/2^1) + (G5/2^1) + (A5/2^1) + (G5/2^1) + (A5^1)
 
 play(melody)
