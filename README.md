@@ -9,3 +9,6 @@ Creating a DSL to play Mozart
 [Mingus has a rich model](https://bspaans.github.io/python-mingus/)
 
 [Music21](music21.orf)
+
+[Music Note to Frequency Chart](https://mixbutton.com/mixing-articles/music-note-to-frequency-chart/)
+
