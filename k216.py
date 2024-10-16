@@ -1,9 +1,13 @@
+import sys
+# wound up just puttin ffmpeg in the project directory
+sys.path.append('E:\\Projects\\Music\\mupy\\bin')
+
 from pydub.generators import Sine
 from pydub.playback import play
 from pydub import AudioSegment
 
 # Define the duration for each note (in milliseconds)
-duration = 500 * 4  # ms for each note
+duration = 500  # ms for each note
 
 def staccato(note, ratio=0.5):
     note_duration = len(note)
