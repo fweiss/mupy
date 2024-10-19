@@ -6,3 +6,5 @@ articulation
 - chord
 - interval
 - key
+
+glide = portamento

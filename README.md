@@ -14,3 +14,6 @@ Creating a DSL to play Mozart
 
 https://www.gyan.dev/ffmpeg/builds/
 
+[improve lower frequency volume](https://tovtech.org/how-to-improve-lower-volume-with-pydub/)
+
+
