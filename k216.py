@@ -9,6 +9,10 @@ from pydub import AudioSegment
 # Define the duration for each note (in milliseconds)
 duration = 500  # ms for each note
 
+##################################################################
+# override some pydub functions to make it easier to work with
+
+# use "^" to staccato a note
 def staccato(note, ratio=0.5):
     note_duration = len(note)
     staccato_ratio = 0.5  # This will reduce the note length to 50%
@@ -18,11 +22,20 @@ def staccato(note, ratio=0.5):
     return staccato_note + silence
 AudioSegment.__xor__ = staccato
 
+# use "/" to shorten a note
 def shorten(note, ratio=2):
     note_duration = len(note)
     shorten_note =  note[:int(note_duration / ratio)]
     return shorten_note
 AudioSegment.__truediv__ = shorten
+
+# force a crossfade to remove pops
+def crossfade(self, arg):
+    if isinstance(arg, AudioSegment):
+        return self.append(arg, crossfade=10)
+    else:
+            return self.apply_gain(arg)
+AudioSegment.__add__ = crossfade
 
 # Define the frequencies for each note in Hz
 f_Z = 0
