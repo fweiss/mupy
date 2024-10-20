@@ -1,5 +1,10 @@
 Creating a DSL to play Mozart
 
+## Playback via speakers
+Using a Xonar DX, there was a pop at the beginning of play.
+Turning off SVN fixed that.
+But there's stil an anoying click between notes, even with the crossfade on append hack.
+
 ## Links and references
 
 [sheet for K216](https://violinsheetmusic.org/classical/work/mozart-violin-concerto-3/)

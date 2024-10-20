@@ -5,9 +5,13 @@ sys.path.append('E:\\Projects\\Music\\mupy\\bin')
 from pydub.generators import Sine
 from pydub.playback import play
 from pydub import AudioSegment
+import pydub.scipy_effects
 
 # Define the duration for each note (in milliseconds)
-duration = 500  # ms for each note
+# k216 allegro quarter note ~ 126 bpm
+# duration = 500  # ms for each note
+bpm = 126
+duration = 60 / bpm * 1000
 
 ##################################################################
 # override some pydub functions to make it easier to work with
@@ -29,12 +33,12 @@ def shorten(note, ratio=2):
     return shorten_note
 AudioSegment.__truediv__ = shorten
 
-# force a crossfade to remove pops
+# force a crossfade to remove click betwee notes
 def crossfade(self, arg):
     if isinstance(arg, AudioSegment):
         return self.append(arg, crossfade=10)
     else:
-            return self.apply_gain(arg)
+        return self.apply_gain(arg)
 AudioSegment.__add__ = crossfade
 
 # Define the frequencies for each note in Hz
@@ -119,5 +123,9 @@ melody += (F4s/4) + (D4/4) + (G4/4) + (E4/4) + (A4/2^1)
 # melody = A5 + F5s + D5 + A4
 # melody = (A5/4^1) + (F5s/4^1) + (D5/4) + (A4/4) + (F4s/4^1) + (D4/4^1) + (G4/4) + (E4/4) + (C4s/4^1) + (A3/4^1)
 # melody += (F4s/4) + (D4/4) + (G4/4) + (E4/4) + (A4/2^1)
+
+# like b6
+# but the pop was due to the sound card
+no_pop = melody.low_pass_filter(8000, order=3)
 
 play(melody)
