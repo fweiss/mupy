@@ -17,6 +17,8 @@ But there's stil an anoying click between notes, even with the crossfade on appe
 
 [Music Note to Frequency Chart](https://mixbutton.com/mixing-articles/music-note-to-frequency-chart/)
 
+[Rests](https://www.stringquest.com/rests-1/)
+
 https://www.gyan.dev/ffmpeg/builds/
 
 [improve lower frequency volume](https://tovtech.org/how-to-improve-lower-volume-with-pydub/)
