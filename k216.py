@@ -42,71 +42,76 @@ def crossfade(self, arg):
         return self.apply_gain(arg)
 AudioSegment.__add__ = crossfade
 
-# Define the frequencies for each note in Hz
-f_Z = 0
+# pattern for defiing a whole note
+def N(frequency):
+    return Sine(frequency).to_audio_segment(duration=whole_note_duration)
 
-f_C4 = 261.63  # Middle C
-f_D4 = 293.66
-f_E4 = 329.63
-f_F4 = 349.23
-f_G4 = 392.00
-f_A4 = 440.00
-f_B4 = 493.88
-
-f_A5 = f_A4 * 2
-f_B5 = f_B4 * 2
-
-f_C5 = f_C4 * 2
-
-# Generate the notes as sine waves
-note_C = Sine(f_G4).to_audio_segment(duration=whole_note_duration)
-# Z = Sine(f_Z).to_audio_segment(duration=duration)
+# Define a whole rest
 Z = AudioSegment.silent(duration=whole_note_duration)
-note_D = Sine(f_G4).to_audio_segment(duration=whole_note_duration)
-note_E = Sine(f_G4).to_audio_segment(duration=whole_note_duration)
-note_F = Sine(f_F4).to_audio_segment(duration=whole_note_duration)
 
-C2 = Sine(f_C4 / 4).to_audio_segment(duration=whole_note_duration)
-D2 = Sine(f_D4 / 4).to_audio_segment(duration=whole_note_duration)
-E2 = Sine(f_E4 / 4).to_audio_segment(duration=whole_note_duration)
-F2 = Sine(f_F4 / 4).to_audio_segment(duration=whole_note_duration)
-G2 = Sine(f_G4 / 4).to_audio_segment(duration=whole_note_duration)
-A2 = Sine(f_A4 / 4).to_audio_segment(duration=whole_note_duration)
-B2 = Sine(f_B4 / 4).to_audio_segment(duration=whole_note_duration)
-C3 = Sine(f_C4 / 2).to_audio_segment(duration=whole_note_duration)
-D3 = Sine(f_D4 / 2).to_audio_segment(duration=whole_note_duration)
-E3 = Sine(f_E4 / 2).to_audio_segment(duration=whole_note_duration)
-F3 = Sine(f_F4 / 2).to_audio_segment(duration=whole_note_duration)
-G3 = Sine(f_G4 / 2).to_audio_segment(duration=whole_note_duration)
-A3 = Sine(f_A4 / 2).to_audio_segment(duration=whole_note_duration)
-B3 = Sine(f_B4 / 2).to_audio_segment(duration=whole_note_duration)
-C4 = Sine(f_C4).to_audio_segment(duration=whole_note_duration) # middle C
-C4s = Sine(277.18).to_audio_segment(duration=whole_note_duration) # middle C
-D4 = Sine(f_D4).to_audio_segment(duration=whole_note_duration)
-E4 = Sine(f_E4).to_audio_segment(duration=whole_note_duration)
-F4 = Sine(f_F4).to_audio_segment(duration=whole_note_duration)
-F4s = Sine(369.99).to_audio_segment(duration=whole_note_duration)
-G4 = Sine(f_G4).to_audio_segment(duration=whole_note_duration)
-A4 = Sine(f_A4).to_audio_segment(duration=whole_note_duration)
-B4 = Sine(f_B4).to_audio_segment(duration=whole_note_duration)
-A5 = Sine(f_A5).to_audio_segment(duration=whole_note_duration)
-B5 = Sine(f_B5).to_audio_segment(duration=whole_note_duration)
-C5 = Sine(f_C5).to_audio_segment(duration=whole_note_duration)
-D5 = Sine(f_D4 * 2).to_audio_segment(duration=whole_note_duration)
-E5 = Sine(f_E4 * 2).to_audio_segment(duration=whole_note_duration)
-F5 = Sine(f_F4 * 2).to_audio_segment(duration=whole_note_duration)
-F5s = Sine(739.99).to_audio_segment(duration=whole_note_duration)
-G5 = Sine(f_G4 * 2).to_audio_segment(duration=whole_note_duration)
-G5s = Sine(830.61).to_audio_segment(duration=whole_note_duration)
+# Define the whole notes
+C2 = N(65.41)
+C2s = N(69.30)
+D2 = N(73.42)
+D2s = N(77.78)
+E2 = N(82.41)
+F2 = N(87.31)
+F2s = N(92.50)
+G2 = N(98.00)
+G2s = N(103.83)
+A2 = N(110.00)
+A2s = N(116.54)
+B2 = N(123.47)
 
-# A5 = Sine(f_A5).to_audio_segment(duration=duration)
-# B5 = Sine(f_B5).to_audio_segment(duration=duration)
-C6 = Sine(f_C5 * 2).to_audio_segment(duration=whole_note_duration)
-C6s = Sine(1108.73).to_audio_segment(duration=whole_note_duration)
-D6 = Sine(f_D4 * 4).to_audio_segment(duration=whole_note_duration)
-D6s = Sine(1174.66).to_audio_segment(duration=whole_note_duration)
-E6 = Sine(1318.51).to_audio_segment(duration=whole_note_duration)
-E6s = Sine(f_D4 * 4).to_audio_segment(duration=whole_note_duration)
+C3 = N(130.81)
+C3s = N(138.59)
+D3 = N(146.83)
+D3s = N(155.56)
+E3 = N(164.81)
+F3 = N(174.61)
+F3s = N(185.00)
+G3 = N(196.00)
+G3s = N(207.65)
+A3 = N(220.00)
+A3s = N(233.08)
+B3 = N(246.94)
+
+C4 = N(261.63)
+C4s = N(277.18)
+D4 = N(293.66)
+D4s = N(311.13)
+E4 = N(329.63)
+F4 = N(349.23)
+F4s = N(369.99)
+G4 = N(392.00)
+G4s = N(415.30)
+A4 = N(440.00)
+A4s = N(466.16)
+B4 = N(493.88)
+
+C5 = N(523.25)
+C5s = N(554.37)
+D5 = N(587.33)
+D5s = N(622.25)
+E5 = N(659.25)
+F5 = N(698.46)
+F5s = N(739.99)
+G5 = N(783.99)
+G5s = N(830.61)
+A5 = N(880.00)
+A5s = N(932.33)
+B5 = N(987.77)
+
+C6 = N(1046.50)
+C6s = N(1108.73)
+D6 = N(1174.66)
+D6s = N(1244.51)
+E6 = N(1318.51)
+F6 = N(1396.91)
+G6 = N(1567.98)
+A6 = N(1760.00)
+B6 = N(1975.53)
+
 
 # nice part starts on page 2 at "D"
 # melody = B5 + Z + A5 + Z + G4 + Z + F4 + Z + E4 + Z + D4 + Z + C4 + Z + B4 + Z + D4
