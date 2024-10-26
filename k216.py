@@ -2,7 +2,7 @@ import sys
 # wound up just puttin ffmpeg in the project directory
 sys.path.append('E:\\Projects\\Music\\mupy\\bin')
 
-from pydub.generators import Sine
+from pydub.generators import Sine, Sawtooth
 from pydub.playback import play
 from pydub import AudioSegment
 import pydub.scipy_effects
@@ -44,7 +44,7 @@ AudioSegment.__add__ = crossfade
 
 # pattern for defiing a whole note
 def N(frequency):
-    return Sine(frequency).to_audio_segment(duration=whole_note_duration)
+    return Sawtooth(frequency).to_audio_segment(duration=whole_note_duration)
 
 # Define a whole rest
 Z = AudioSegment.silent(duration=whole_note_duration)
@@ -130,7 +130,7 @@ melody += (F4s/4) + (D4/4) + (G4/4) + (E4/4) + (A4/3) + (Z/3) + (Z/1)
 
 melody += (Z/2) + (Z/3) +(A4/4^1) + (F4s/4^1) + (B4/4^1) + (G4/4^1) + (C5s/4^1) + (A4/4^1) + (D5/4) + (A4/4) + (E5/4) + (C5s/4)
 melody += (F5s/4^1) + (D5/4^1) + (G5/4^1) + (E5/4^1) + (A5/4^1) + (F5s/4^1) + (A5s/4^1) + (F5s/4^1) + (B5/2) + (D6/2)
-melody += (E5/1) + (E5/4) + (F5s/4) + (G5/4) + (F5/4) + (A5/4) + (G5/4) + (F5s/4) + (E5/4) + (D5/2)
+melody += (E5/1) + (E5/4) + (F5s/4) + (G5/4) + (F5s/4) + (A5/4) + (G5/4) + (F5s/4) + (E5/4) + (D5/2)
 
 # like b6
 # but the pop was due to the sound card
