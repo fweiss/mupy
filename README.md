@@ -31,3 +31,5 @@ https://www.gyan.dev/ffmpeg/builds/
 [improve lower frequency volume](https://tovtech.org/how-to-improve-lower-volume-with-pydub/)
 
 [Score with play along (ads)](https://www.youtube.com/watch?v=Z__wnalazuQ)
+
+[ streaming with pyaudio](https://stackoverflow.com/questions/52604019/real-time-continuous-sounds-with-pydub)
