@@ -1,3 +1,6 @@
+import time
+t0 = time.perf_counter()
+
 import sys
 # wound up just puttin ffmpeg in the project directory
 sys.path.append('E:\\Projects\\Music\\mupy\\bin')
@@ -5,7 +8,7 @@ sys.path.append('E:\\Projects\\Music\\mupy\\bin')
 from pydub.generators import Sine, Sawtooth
 from pydub.playback import play
 from pydub import AudioSegment
-import pydub.scipy_effects
+# import pydub.scipy_effects
 
 # Define the duration for each note (in milliseconds)
 # k216 allegro quarter note ~ 126 bpm
@@ -44,10 +47,13 @@ AudioSegment.__add__ = crossfade
 
 # pattern for defiing a whole note
 def N(frequency):
-    return Sawtooth(frequency).to_audio_segment(duration=whole_note_duration)
+    return Sine(frequency).to_audio_segment(duration=whole_note_duration)
 
 # Define a whole rest
 Z = AudioSegment.silent(duration=whole_note_duration)
+
+t1 = time.perf_counter()
+print(f"ready for notes: {t1 - t0} s")
 
 # Define the whole notes
 C2 = N(65.41)
@@ -112,6 +118,8 @@ G6 = N(1567.98)
 A6 = N(1760.00)
 B6 = N(1975.53)
 
+t1 = time.perf_counter()
+print(f"ready for melody: {t1 - t0} s")
 
 # nice part starts on page 2 at "D"
 # melody = B5 + Z + A5 + Z + G4 + Z + F4 + Z + E4 + Z + D4 + Z + C4 + Z + B4 + Z + D4
@@ -136,5 +144,8 @@ melody += (E5/1) + (E5/4) + (F5s/4) + (G5/4) + (F5s/4) + (A5/4) + (G5/4) + (F5s/
 # but the pop was due to the sound card
 # no_pop = melody.low_pass_filter(8000, order=3)
 
-# play(melody)
-melody.export("melody.wav", format="wav")
+t1 = time.perf_counter()
+print(f"ready to play: {t1 - t0} s")
+
+play(melody)
+# melody.export("melody.wav", format="wav")
