@@ -1,0 +1,5 @@
+- git clone https://github.com/shorepine/amy.git
+- pip install -r requirements.txt
+- cd src
+- python setup.py build
+- sudo python setup.py install
